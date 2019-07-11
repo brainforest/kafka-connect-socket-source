@@ -72,8 +72,8 @@ public class KafkaBinaryProducer {
             records.add(record);
         }
 
-        int numOfThreads = 50;
-        final int numberOfMessage = 100;
+        int numOfThreads = 5;
+        final int numberOfMessage = 5;
         long start = System.currentTimeMillis();
         Thread[] threads = new Thread[numOfThreads];
         for (int i = 0; i<numOfThreads; i++) {

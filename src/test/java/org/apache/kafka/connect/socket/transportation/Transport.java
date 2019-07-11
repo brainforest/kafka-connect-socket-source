@@ -3,6 +3,7 @@ package org.apache.kafka.connect.socket.transportation;
 
 
 
+import org.apache.kafka.connect.socket.ExceptionHander;
 import org.apache.kafka.connect.socket.model.Record;
 import org.apache.kafka.connect.socket.model.Response;
 
@@ -18,7 +19,13 @@ public class Transport {
     protected DataInputStream dataReader;
 
     public Transport(String hostName, int port) throws IOException {
-        Socket socket = new Socket(hostName, port);
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHander());
+        try {
+            socket = new Socket(hostName, port);
+        } catch (java.net.ConnectException e) {
+            System.out.println("Cannot connect Kafka Connect Server : " + e.getMessage());
+            System.exit(-1);
+        }
         dataWriter = new DataOutputStream(socket.getOutputStream());
         dataReader = new DataInputStream(socket.getInputStream());
     }
