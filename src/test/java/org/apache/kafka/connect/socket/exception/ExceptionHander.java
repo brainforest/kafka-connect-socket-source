@@ -6,5 +6,4 @@ public class ExceptionHander  implements Thread.UncaughtExceptionHandler {
             System.out.println(e.getMessage());
             System.exit(-1);
         }
-
 }
