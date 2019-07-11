@@ -3,7 +3,7 @@ package org.apache.kafka.connect.socket.transportation;
 
 
 
-import org.apache.kafka.connect.socket.ExceptionHander;
+import org.apache.kafka.connect.socket.exception.ExceptionHander;
 import org.apache.kafka.connect.socket.model.Record;
 import org.apache.kafka.connect.socket.model.Response;
 

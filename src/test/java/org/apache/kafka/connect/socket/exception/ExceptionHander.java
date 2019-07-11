@@ -1,4 +1,4 @@
-package org.apache.kafka.connect.socket;
+package org.apache.kafka.connect.socket.exception;
 
 public class ExceptionHander  implements Thread.UncaughtExceptionHandler {
         public void uncaughtException(Thread t, Throwable e) {
