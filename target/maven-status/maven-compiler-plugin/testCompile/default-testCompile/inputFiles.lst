@@ -1,0 +1,13 @@
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/bind/DfhcommareaTransformers.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/ObjectFactory.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/Dtar020KcodeStoreKey.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/Dfhcommarea.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/SampleKafkaConsumer.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/SimpleSocketReader.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/bind/DfhcommareaHostToJavaTransformer.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/package-info.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/bind/DfhcommareaBinding.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/Test.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/legstar/bind/DfhcommareaJavaToHostTransformer.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/KafkaRandomStringWriter.java
+/Users/gokcerbelgusen/Downloads/kafka-connect-socket-source-master/src/test/java/org/apache/kafka/connect/socket/KafkaEBCIDICWriter.java

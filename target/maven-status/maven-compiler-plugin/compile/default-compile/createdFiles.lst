@@ -1,0 +1,5 @@
+org/apache/kafka/connect/socket/SocketSourceTask.class
+org/apache/kafka/connect/converters/ByteConverter.class
+org/apache/kafka/connect/socket/SocketThread.class
+org/apache/kafka/connect/socket/SocketServerThread.class
+org/apache/kafka/connect/socket/SocketSourceConnector.class
