@@ -18,7 +18,7 @@ public class SocketThread extends Thread {
     private ConcurrentLinkedQueue<byte[]> messages;
     private static char request;
 
-    static int CHUNKSIZE = 1000;
+    static int CHUNKSIZE = 1024;
 
     public SocketThread(Socket clientSocket, ConcurrentLinkedQueue<byte[]> messages) {
         this.clientSocket = clientSocket;
@@ -74,6 +74,7 @@ public class SocketThread extends Thread {
                 }
             } catch (IOException e) {
                 log.error(e.getMessage());
+                return;
             }
         }
     }

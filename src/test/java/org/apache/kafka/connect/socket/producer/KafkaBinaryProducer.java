@@ -7,12 +7,14 @@ import org.apache.kafka.connect.socket.transportation.Transport;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class KafkaBinaryProducer {
 
     static int HEADER=8;
     static int RECORDSIZE=27;
+
 
     private static int toDigit(char hexChar) {
         int digit = Character.digit(hexChar, 16);
@@ -58,22 +60,22 @@ public class KafkaBinaryProducer {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException, HostTransformException {
+
+
         byte[] buffer = new byte[RECORDSIZE];
         List<Record> records = new ArrayList<>();
         Transport transport = new Transport("localhost",12345);
 
         FileInputStream fileInputStream = new FileInputStream(new File("src/resources/DTAR020.bin"));
         while(fileInputStream.read(buffer) > 0) {
-            Record record = new Record();
-            record.setSize(RECORDSIZE);
-            record.setRequest(Response.NOT_REQUIRED);
-            record.setMessage(buffer);
-            System.out.println(encodeHexString(buffer));
+            byte[] bytes = Arrays.copyOf(buffer, RECORDSIZE);
+            Record record = new Record(RECORDSIZE,Response.NOT_REQUIRED,bytes);
+            //System.out.println(encodeHexString(buffer) + " " + encodeHexString(record.getMessage()));
             records.add(record);
         }
 
-        int numOfThreads = 5;
-        final int numberOfMessage = 5;
+        int numOfThreads = 10;
+        final int numberOfMessage = 10;
         long start = System.currentTimeMillis();
         Thread[] threads = new Thread[numOfThreads];
         for (int i = 0; i<numOfThreads; i++) {
@@ -81,6 +83,7 @@ public class KafkaBinaryProducer {
                 for (int j=0; j< numberOfMessage; j++) {
                     int index = (int) (Math.random() * 370);
                     try {
+                        //System.out.println(index + " " + encodeHexString(records.get(index).getMessage()));
                         transport.send(records.get(index));
                     } catch (IOException e) {
                         e.printStackTrace();

@@ -1,12 +1,8 @@
 package org.apache.kafka.connect.socket.model;
-
 import java.nio.ByteBuffer;
-
-
+import java.util.Arrays;
 
 public class Record {
-
-
     protected long size;
     protected char request;
     protected byte[] message;
@@ -22,8 +18,9 @@ public class Record {
         return data.array();
     }
 
+
     public Record(long size, char request, byte[] message) {
-        this.size = size;
+        this.size =   size;
         this.request = request;
         this.message = message;
     }
@@ -50,5 +47,14 @@ public class Record {
 
     public void setMessage(byte[] message) {
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "size=" + size +
+                ", request=" + request +
+                ", message=" + Arrays.toString(message) +
+                '}';
     }
 }
