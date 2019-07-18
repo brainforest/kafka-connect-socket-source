@@ -18,7 +18,6 @@ public class Record {
         return data.array();
     }
 
-
     public Record(long size, char request, byte[] message) {
         this.size =   size;
         this.request = request;

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class KafkaStringProducer {
     /* Max record layout that can be */
-    static int PAYLOADSIZE = 8092;
+    static int PAYLOADSIZE = 1024;
 
     public static String getAlphaNumericString(int n)  {
         // chose a Character random from this String
@@ -27,7 +27,7 @@ public class KafkaStringProducer {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         Transport transport = new Transport("localhost",12345);
-        int numOfThreads = 100;
+        int numOfThreads = 10;
         int numberOfMessage = (int) (Math.random()*1000 + 100);
         long start = System.currentTimeMillis();
         Thread[] threads = new Thread[numOfThreads];

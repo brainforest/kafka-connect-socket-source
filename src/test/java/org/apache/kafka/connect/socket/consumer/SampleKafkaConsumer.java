@@ -5,12 +5,9 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.connect.socket.legstar.Dfhcommarea;
 import org.apache.kafka.connect.socket.legstar.bind.DfhcommareaTransformers;
-import org.codehaus.jackson.map.deser.StdDeserializer;
 
 import java.util.Collections;
 import java.util.Properties;
@@ -107,7 +104,7 @@ public class SampleKafkaConsumer {
                     Dfhcommarea dfhcommarea = transformers.toJava(record.value());
                     System.out.println(dfhcommarea.toString());
                 } catch (HostTransformException e) {
-                    e.printStackTrace();
+                    System.out.println(new String(record.value()));
                 }
             });
             // commits the offset of record to broker.
