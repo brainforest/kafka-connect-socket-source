@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class KafkaStringProducer {
     /* Max record layout that can be */
-    static int PAYLOADSIZE = 1024;
+    static int PAYLOADSIZE = 256;
 
     public static String getAlphaNumericString(int n)  {
         // chose a Character random from this String
@@ -26,25 +26,30 @@ public class KafkaStringProducer {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        Transport transport = new Transport("localhost",12345);
+        final Transport transport = new Transport("localhost",12345);
         int numOfThreads = 10;
-        int numberOfMessage = (int) (Math.random()*1000 + 100);
+        final int numberOfMessage = (int) (Math.random()*1000 + 100);
         long start = System.currentTimeMillis();
         Thread[] threads = new Thread[numOfThreads];
         for (int i = 0; i<numOfThreads; i++) {
-            threads[i] = new Thread(() -> {
-                for (int j=0; j< numberOfMessage; j++) {
-                    try {
-                        int size = (int) (Math.random()*PAYLOADSIZE+100);
-                        String message = getAlphaNumericString(size);
-                        Record record = new Record();
-                        record.setSize(size);
-                        record.setRequest(Response.NOT_REQUIRED);
-                        record.setMessage(message.getBytes());
-                        transport.send(record);
-                    } catch (IOException  e) {
-                       e.printStackTrace();
+            threads[i] = new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    for (int j=0; j< numberOfMessage; j++) {
+                        try {
+                            int size = (int) (Math.random() * PAYLOADSIZE + 100);
+                            String message = getAlphaNumericString(size);
+                            Record record = new Record();
+                            record.setSize(size);
+                            record.setRequest(Response.NOT_REQUIRED);
+                            record.setMessage(message.getBytes());
+                            transport.send(record);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
+
                 }
             });
             threads[i].start();

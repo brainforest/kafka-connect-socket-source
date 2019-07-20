@@ -63,8 +63,8 @@ public class KafkaBinaryProducer {
 
 
         byte[] buffer = new byte[RECORDSIZE];
-        List<Record> records = new ArrayList<>();
-        Transport transport = new Transport("localhost",12345);
+        final List<Record> records = new ArrayList<>();
+        final Transport transport = new Transport("localhost",12345);
 
         FileInputStream fileInputStream = new FileInputStream(new File("src/resources/DTAR020.bin"));
         while(fileInputStream.read(buffer) > 0) {
@@ -79,17 +79,21 @@ public class KafkaBinaryProducer {
         long start = System.currentTimeMillis();
         Thread[] threads = new Thread[numOfThreads];
         for (int i = 0; i<numOfThreads; i++) {
-            threads[i] = new Thread(() -> {
-                for (int j=0; j< numberOfMessage; j++) {
-                    int index = (int) (Math.random() * 370);
-                    try {
-                        //System.out.println(index + " " + encodeHexString(records.get(index).getMessage()));
-                        transport.send(records.get(index));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            threads[i] = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int j=0; j< numberOfMessage; j++) {
+                        int index = (int) (Math.random() * 370);
+                        try {
+                            System.out.println(index + " " + encodeHexString(records.get(index).getMessage()));
+                            transport.send(records.get(index));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });
+
             threads[i].start();
         }
         for (int i = 0; i<numOfThreads; i++) threads[i].join();

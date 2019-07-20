@@ -67,13 +67,13 @@ public class SocketThread extends Thread {
                     output.write(new byte[] { 'C' });
                 }
                 if (packet == null) {
-                    clientSocket.close();
+                    //clientSocket.close();
                     return;
                 } else {
                     messages.add(packet);
                 }
             } catch (IOException e) {
-                log.error(e.getMessage());
+                //log.error(e.getMessage());
                 return;
             }
         }

@@ -1,10 +1,7 @@
 package org.apache.kafka.connect.socket.consumer;
 
 import com.legstar.coxb.transform.HostTransformException;
-import org.apache.kafka.clients.consumer.Consumer;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import org.apache.kafka.connect.socket.legstar.Dfhcommarea;
 import org.apache.kafka.connect.socket.legstar.bind.DfhcommareaTransformers;
@@ -99,14 +96,14 @@ public class SampleKafkaConsumer {
             }
             DfhcommareaTransformers transformers = new DfhcommareaTransformers();
             //print each record.
-            consumerRecords.forEach(record -> {
+            for( ConsumerRecord<byte[], byte[]> record : consumerRecords) {
                 try {
                     Dfhcommarea dfhcommarea = transformers.toJava(record.value());
                     System.out.println(dfhcommarea.toString());
                 } catch (HostTransformException e) {
                     System.out.println(new String(record.value()));
                 }
-            });
+            }
             // commits the offset of record to broker.
             consumer.commitAsync();
         }
