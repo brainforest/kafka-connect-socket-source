@@ -84,7 +84,7 @@ public class SampleKafkaConsumer {
         Consumer<byte[], byte[]> consumer = createConsumer();
         int noMessageFound = 0;
         while (true) {
-            ConsumerRecords<byte[], byte[]> consumerRecords = consumer.poll(1000);
+            ConsumerRecords<byte[], byte[]> consumerRecords = consumer.poll(100L);
             // 1000 is the time in milliseconds consumer will wait if no record is found at broker.
             if (consumerRecords.count() == 0) {
                 noMessageFound++;

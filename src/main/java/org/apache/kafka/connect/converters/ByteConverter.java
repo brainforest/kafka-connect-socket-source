@@ -7,6 +7,7 @@ import org.apache.kafka.connect.data.SchemaAndValue;
 import org.apache.kafka.connect.errors.DataException;
 import org.apache.kafka.connect.storage.Converter;
 import org.apache.kafka.connect.storage.ConverterConfig;
+import org.apache.kafka.connect.storage.ConverterType;
 import org.apache.kafka.connect.storage.HeaderConverter;
 
 import java.util.Map;
@@ -18,11 +19,14 @@ import java.util.Map;
  */
 public class ByteConverter implements Converter, HeaderConverter {
 
-    private static final ConfigDef CONFIG_DEF = ConverterConfig.newConfigDef();
+  //  private static final ConfigDef CONFIG_DEF = ConverterConfig.newConfigDef();
+
 
     @Override
     public ConfigDef config() {
-        return CONFIG_DEF;
+        return (new ConfigDef()).define("converter.type", ConfigDef.Type.STRING, ConfigDef.NO_DEFAULT_VALUE, ConfigDef.ValidString.in(new String[]{ConverterType.KEY.getName(), ConverterType.VALUE.getName(), ConverterType.HEADER.getName()}), ConfigDef.Importance.LOW, "How this converter will be used.");
+
+//        return CONFIG_DEF;
     }
 
     @Override
