@@ -7,6 +7,12 @@
     <groupId>org.apache.kafka</groupId>
     <artifactId>connect-socket-source</artifactId>
     <version>1.0</version>
+    <repositories>
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
@@ -45,12 +51,14 @@
             <groupId>org.apache.kafka</groupId>
             <artifactId>connect-api</artifactId>
             <version>1.1.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>1.1.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -71,7 +79,6 @@
             <groupId>com.legsem.legstar</groupId>
             <artifactId>legstar-coxbapi</artifactId>
             <version>1.6.0</version>
-
         </dependency>
 
         <dependency>
