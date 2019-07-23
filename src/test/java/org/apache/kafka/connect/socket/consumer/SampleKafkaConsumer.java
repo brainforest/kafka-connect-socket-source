@@ -55,7 +55,7 @@ public class SampleKafkaConsumer {
     }
 
     public interface IKafkaConstants {
-        public static String KAFKA_BROKERS = "localhost:9092";
+        public static String KAFKA_BROKERS = "192.168.15.1:9092";
         public static Integer MESSAGE_COUNT=1000;
         public static String CLIENT_ID="client1";
         public static String TOPIC_NAME="connect-test";
@@ -90,7 +90,7 @@ public class SampleKafkaConsumer {
                 noMessageFound++;
                 if (noMessageFound > IKafkaConstants.MAX_NO_MESSAGE_FOUND_COUNT)
                     // If no message found count is reached to threshold exit loop.
-                    break;
+                    continue;
                 else
                     continue;
             }
@@ -107,6 +107,6 @@ public class SampleKafkaConsumer {
             // commits the offset of record to broker.
             consumer.commitAsync();
         }
-        consumer.close();
+       // consumer.close();
     }
 }

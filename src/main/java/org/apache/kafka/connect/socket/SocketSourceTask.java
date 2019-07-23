@@ -25,7 +25,6 @@ public class SocketSourceTask extends SourceTask {
     private String topic;
     private SocketServerThread socketServerThread;
 
-    private static final ConfigDef CONFIG_DEF = new ConfigDef();
 
     public static String byteToHex(byte num) {
         char[] hexDigits = new char[2];
@@ -75,21 +74,23 @@ public class SocketSourceTask extends SourceTask {
     }
 
     @Override
-    public List<SourceRecord> poll() {
+    public List<SourceRecord> poll() throws InterruptedException {
         List<SourceRecord> records = new ArrayList<>(0);
         // while there are new messages in the socket queue
         while (!socketServerThread.messages.isEmpty() && records.size() < batchSize) {
             // get the message
             byte[] message = socketServerThread.messages.poll();
             // creates the record
-            SourceRecord record = new SourceRecord(Collections.singletonMap("socket", 0),
-                    Collections.singletonMap("0", 0),
-                    topic,
-                    Schema.OPTIONAL_BYTES_SCHEMA,
-                    UUID.randomUUID().toString().getBytes(),
-                    Schema.OPTIONAL_BYTES_SCHEMA,
-                    message);
-            records.add(record);
+            if (message != null) {
+                SourceRecord record = new SourceRecord(Collections.singletonMap("socket", 0),
+                        Collections.singletonMap("0", 0),
+                        topic,
+                        Schema.OPTIONAL_BYTES_SCHEMA,
+                        UUID.randomUUID().toString().getBytes(),
+                        Schema.OPTIONAL_BYTES_SCHEMA,
+                        message);
+                records.add(record);
+            } else Thread.sleep(1);
         }
         return records;
     }

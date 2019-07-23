@@ -26,7 +26,13 @@ public class SocketSourceConnector extends SourceConnector {
     public static final String BATCH_SIZE = "batch.size";
     public static final String TOPIC = "topic";
 
-    private static final ConfigDef CONFIG_DEF = new ConfigDef();
+    private static ConfigDef CONFIG_DEF = new ConfigDef();
+
+    static {
+        CONFIG_DEF.define(PORT, ConfigDef.Type.INT, ConfigDef.Importance.HIGH,"Source TCP/IP socket port")
+                  .define(TOPIC,ConfigDef.Type.STRING, ConfigDef.Importance.HIGH,"Topic name for socket source")
+                  .define(BATCH_SIZE, ConfigDef.Type.INT, ConfigDef.Importance.LOW,"Batch Size");
+    }
 
     private String port;
     private String batchSize;

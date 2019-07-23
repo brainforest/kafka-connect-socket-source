@@ -13,7 +13,7 @@ mvn package
 name=socket-connector
 connector.class=org.apache.kafka.connect.socket.SocketSourceConnector
 tasks.max=1
-topic=test
+topic=connect-test
 port=12345
 batch.size=100
 ```
