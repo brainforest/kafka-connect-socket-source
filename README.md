@@ -1,5 +1,5 @@
 # Kafka Connect Socket Source
-The connector is used to load data to Kafka from a Socket. Project uses custom Byte Converter. TCP/IP source connector is based on request/reply mechanism and sample Record Layout, containing size of paylod.
+The connector is used to load data to Kafka from a Socket. TCP/IP source connector is based on request/reply mechanism and sample Record Layout, containing size of payload.
 
 # Building
 You can build the connector with Maven using the standard lifecycle phases:
