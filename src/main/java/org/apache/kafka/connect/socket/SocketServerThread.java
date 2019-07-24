@@ -9,11 +9,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-/**
- * SocketServerThread accepts connections from a Socket and starts a new Thread for every new connection.
- *
- * @author Andrea Patelli
- */
 public class SocketServerThread implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(SocketServerThread.class);
     protected ConcurrentLinkedQueue<byte[]> messages;

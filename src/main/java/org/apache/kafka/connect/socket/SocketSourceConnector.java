@@ -13,12 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * SocketSourceConnector implements the connector interface
- * to write on Kafka messages received on a Socket
- *
- * @author Andrea Patelli
- */
+
 public class SocketSourceConnector extends SourceConnector {
     private final static Logger log = LoggerFactory.getLogger(SocketSourceConnector.class);
 

@@ -1,9 +1,6 @@
 package org.apache.kafka.connect.socket;
 
-import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.connect.data.Schema;
-import org.apache.kafka.connect.data.SchemaBuilder;
-import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.errors.ConnectException;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.apache.kafka.connect.source.SourceTask;
@@ -12,11 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-/**
- * SocketSourceTask is a Task that reads records from a Socket for storage in Kafka.
- *
- * @author Andrea Patelli
- */
+
 public class SocketSourceTask extends SourceTask {
     private final static Logger log = LoggerFactory.getLogger(SocketSourceTask.class);
 

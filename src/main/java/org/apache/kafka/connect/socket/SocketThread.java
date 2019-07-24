@@ -7,11 +7,6 @@ import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-/**
- * Thread to handle a single Socket connection
- *
- * @author Andrea Patelli
- */
 public class SocketThread extends Thread {
     private static final Logger log = LoggerFactory.getLogger(SocketThread.class);
     private Socket clientSocket;
