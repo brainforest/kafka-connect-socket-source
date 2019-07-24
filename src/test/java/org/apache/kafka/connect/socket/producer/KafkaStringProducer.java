@@ -28,7 +28,7 @@ public class KafkaStringProducer {
 
         final Transport transport = new Transport("localhost",12345);
         int numOfThreads = 10;
-        final int numberOfMessage = (int) (Math.random()*1000 + 100);
+        final int numberOfMessage = (int) (Math.random()*100 + 100);
         long start = System.currentTimeMillis();
         Thread[] threads = new Thread[numOfThreads];
         for (int i = 0; i<numOfThreads; i++) {
