@@ -72,16 +72,16 @@ public class SocketSourceTask extends SourceTask {
         // while there are new messages in the socket queue
         while (!socketServerThread.messages.isEmpty() && records.size() < batchSize) {
             // get the message
-            byte[] message = socketServerThread.messages.poll();
+            Packet p = socketServerThread.messages.poll();
             // creates the record
-            if (message != null) {
+            if (p.getData() != null) {
                 SourceRecord record = new SourceRecord(Collections.singletonMap("socket", 0),
                         Collections.singletonMap("0", 0),
-                        topic,
+                        p.getTopic(),
                         Schema.OPTIONAL_BYTES_SCHEMA,
                         UUID.randomUUID().toString().getBytes(),
                         Schema.OPTIONAL_BYTES_SCHEMA,
-                        message);
+                        p.getData());
                 records.add(record);
             } else Thread.sleep(1);
         }

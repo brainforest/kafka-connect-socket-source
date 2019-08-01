@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class SocketServerThread implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(SocketServerThread.class);
-    protected ConcurrentLinkedQueue<byte[]> messages;
+    protected ConcurrentLinkedQueue<Packet> messages;
 
     private ServerSocket serverSocket;
     private Socket clientSocket;

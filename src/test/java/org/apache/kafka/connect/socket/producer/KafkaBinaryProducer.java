@@ -69,13 +69,17 @@ public class KafkaBinaryProducer {
         FileInputStream fileInputStream = new FileInputStream(new File("src/resources/DTAR020.bin"));
         while(fileInputStream.read(buffer) > 0) {
             byte[] bytes = Arrays.copyOf(buffer, RECORDSIZE);
-            Record record = new Record(RECORDSIZE,Response.NOT_REQUIRED,bytes);
-            //System.out.println(encodeHexString(buffer) + " " + encodeHexString(record.getMessage()));
+            int topic_index = (int) (Math.random() * 9L);
+            String topic = "topic-0" + topic_index;
+            Record record = new Record(RECORDSIZE,Response.NOT_REQUIRED,bytes,topic.getBytes());
+            System.out.println(encodeHexString(buffer) + " " + encodeHexString(record.getMessage()));
             records.add(record);
         }
 
+
+
         int numOfThreads = 10;
-        final int numberOfMessage = 10;
+        final int numberOfMessage = 1000;
         long start = System.currentTimeMillis();
         Thread[] threads = new Thread[numOfThreads];
         for (int i = 0; i<numOfThreads; i++) {
@@ -85,10 +89,10 @@ public class KafkaBinaryProducer {
                     for (int j=0; j< numberOfMessage; j++) {
                         int index = (int) (Math.random() * 370);
                         try {
-                            System.out.println(index + " " + encodeHexString(records.get(index).getMessage()));
+                            System.out.println(index + " " + new String(records.get(index).getTopic()) + " " + encodeHexString(records.get(index).getMessage()));
                             transport.send(records.get(index));
                         } catch (IOException e) {
-                            e.printStackTrace();
+                             e.printStackTrace();
                         }
                     }
                 }

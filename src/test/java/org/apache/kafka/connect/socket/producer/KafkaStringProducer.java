@@ -44,6 +44,7 @@ public class KafkaStringProducer {
                             record.setSize(size);
                             record.setRequest(Response.NOT_REQUIRED);
                             record.setMessage(message.getBytes());
+                            record.setTopic("12345678".getBytes());
                             transport.send(record);
                         } catch (IOException e) {
                             e.printStackTrace();

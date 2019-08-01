@@ -10,12 +10,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class SocketThread extends Thread {
     private static final Logger log = LoggerFactory.getLogger(SocketThread.class);
     private Socket clientSocket;
-    private ConcurrentLinkedQueue<byte[]> messages;
+    private ConcurrentLinkedQueue<Packet> messages;
     private static char request;
+    private static byte[] dynamicTopic = new byte[8];
 
     static int CHUNKSIZE = 1024;
 
-    public SocketThread(Socket clientSocket, ConcurrentLinkedQueue<byte[]> messages) {
+    public SocketThread(Socket clientSocket, ConcurrentLinkedQueue<Packet> messages) {
         this.clientSocket = clientSocket;
         this.messages = messages;
     }
@@ -25,6 +26,7 @@ public class SocketThread extends Thread {
         try {
             size = dataReader.readLong();
             request = dataReader.readChar();
+            dataReader.read(dynamicTopic);
         } catch (java.io.EOFException e) {
             return null;
         };
@@ -53,19 +55,20 @@ public class SocketThread extends Thread {
             return;
         }
         // while connected, reads a line and saves it in the queue
-        byte[] packet;
+        byte[] data;
         DataInputStream dataReader = new DataInputStream(input);
         while (true) {
             try {
-                packet = PacketReader(dataReader);
+                data = PacketReader(dataReader);
                 if (request == '1' ) {   /* response is waiting */
                     output.write(new byte[] { 'C' });
                 }
-                if (packet == null) {
+                if (data == null) {
                     //clientSocket.close();
                     return;
                 } else {
-                    messages.add(packet);
+                    Packet p = new Packet(data,new String(dynamicTopic));
+                    messages.add(p);
                 }
             } catch (IOException e) {
                 //log.error(e.getMessage());
