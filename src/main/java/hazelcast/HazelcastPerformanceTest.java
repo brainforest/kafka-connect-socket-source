@@ -11,7 +11,8 @@ public class HazelcastPerformanceTest {
         Config config = new Config();
         config.getNetworkConfig().setPortAutoIncrement(true);
         config.getNetworkConfig().setPort(10555);
-        config.getMapConfig("default").setBackupCount(2);
+        config.getMapConfig("default").setBackupCount(2
+        );
         config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
         config.getNetworkConfig().getJoin().getTcpIpConfig().setEnabled(true);
         config.getNetworkConfig().getInterfaces().addInterface("127.0.0.1");
