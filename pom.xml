@@ -98,19 +98,19 @@
         <dependency>
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast</artifactId>
-            <version>3.11.2</version>
+            <version>5.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast</artifactId>
-            <version>3.12</version>
+            <version>5.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast</artifactId>
-            <version>3.12</version>
+            <version>5.1</version>
             <scope>compile</scope>
         </dependency>
 
